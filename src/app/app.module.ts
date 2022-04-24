@@ -13,7 +13,6 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -30,8 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [PersonService, AccountService, MovementsService],
   bootstrap: [AppComponent],

@@ -7,7 +7,7 @@ h5 {
     color: navy !important;
 }
 
-.bp-input {
+input {
     border-radius: 3px;
     height: 30px;
     width: 500px;
@@ -26,7 +26,71 @@ h5 {
 }
 
 
-.bp-search {
+.bp-space-between {
     display: flex;
     justify-content: space-between;
+}
+
+
+#persons {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#persons td,
+#persons th {
+    border: 1px solid rgb(190, 186, 186);
+    ;
+    padding: 8px;
+}
+
+#persons tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#persons tr:hover {
+    background-color: #ddd;
+}
+
+#persons th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: white;
+    color: navy;
+}
+
+span {
+    color: red;
+}
+
+.canceled {
+    background-color: rgb(245, 219, 72);
+    color: navy;
+    border-radius: 3px;
+    border: 1px solid rgb(245, 219, 72);
+    height: 35px;
+    width: 100px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.save {
+    background-color: rgb(245, 219, 72);
+    color: navy;
+    border-radius: 3px;
+    border: 1px solid rgb(245, 219, 72);
+    height: 35px;
+    width: 100px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+select{
+    border-radius: 3px;
+    height: 30px;
+    width: 507px;
+    border: 1px solid gray;
 }
