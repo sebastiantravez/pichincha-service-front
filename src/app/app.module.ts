@@ -9,9 +9,16 @@ import { PersonService } from './services/person.service';
 import { PersonComponent } from './pages/person/person.component';
 import { AccountComponent } from './pages/account/account.component';
 import { MovementsComponent } from './pages/movements/movements.component';
+import { SidebarComponent } from './pages/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [AppComponent, PersonComponent, AccountComponent, MovementsComponent],
+  declarations: [
+    AppComponent,
+    PersonComponent,
+    AccountComponent,
+    MovementsComponent,
+    SidebarComponent,
+  ],
   imports: [AppRoutingModule, BrowserModule],
   providers: [PersonService, AccountService, MovementsService],
   bootstrap: [AppComponent],
