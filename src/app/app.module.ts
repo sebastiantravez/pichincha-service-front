@@ -11,6 +11,10 @@ import { AccountComponent } from './pages/account/account.component';
 import { MovementsComponent } from './pages/movements/movements.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,14 @@ import { ReportsComponent } from './pages/reports/reports.component';
     SidebarComponent,
     ReportsComponent,
   ],
-  imports: [AppRoutingModule, BrowserModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [PersonService, AccountService, MovementsService],
   bootstrap: [AppComponent],
 })
