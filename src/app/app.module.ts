@@ -10,6 +10,7 @@ import { PersonComponent } from './pages/person/person.component';
 import { AccountComponent } from './pages/account/account.component';
 import { MovementsComponent } from './pages/movements/movements.component';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
+import { ReportsComponent } from './pages/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SidebarComponent } from './pages/sidebar/sidebar.component';
     AccountComponent,
     MovementsComponent,
     SidebarComponent,
+    ReportsComponent,
   ],
   imports: [AppRoutingModule, BrowserModule],
   providers: [PersonService, AccountService, MovementsService],
