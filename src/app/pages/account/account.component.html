@@ -1,5 +1,75 @@
 <h1>Cuentas</h1>
-<div class="bp-search">
-    <input class="bp-input" type="text" placeholder="Buscar">
-    <button class="bp-button">Nuevo</button>
+<div *ngIf="isNewAccount" style="text-align: right;">
+    <button class="save" *ngIf="!update" (click)="saveAccount()" type="button">Guardar</button>
+    <button class="save" *ngIf="update" (click)="updateAccount()" type="button">Actualizar</button>
+    <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
+</div>
+<div *ngIf="!isNewAccount" class="bp-space-between">
+    <input class="bp-input" #searchInput (keydown)="searchAccount(searchInput.value)" type="text" placeholder="Buscar">
+    <button class="bp-button" (click)="registerAccount()">Nuevo</button>
+</div>
+<div *ngIf="!isNewAccount">
+    <br>
+    <table id="persons">
+        <tr>
+            <th>Cliente</th>
+            <th>Número de cuenta</th>
+            <th>Tipo de cuenta</th>
+            <th>Monto inicial</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        <tr *ngFor="let account of accounts">
+            <td>{{account.personPresenter?.fullName}}</td>
+            <td>{{account.accountNumber}}</td>
+            <td>{{account.accountType}}</td>
+            <td>{{account.initialAmount}}</td>
+            <td *ngIf="account?.status">ACTIVO</td>
+            <td *ngIf="!account?.status">INACTIVO</td>
+            <td>
+                <button (click)="editAccount(account)" class="edit">Editar</button>
+                <button (click)="deleteAccount(account)" class="delete">Eliminar</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="isNewAccount" class="bp-new-person">
+    <form [formGroup]="accountForm">
+        <div class="bp-space-between">
+            <div>
+                <p>Cliente:</p>
+                <select formControlName="clientId">
+                    <option value="{{person.clientPresenter?.clientId}}" *ngFor="let person of persons">
+                        {{person.fullName}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Tipo de cuenta:</p>
+                <select formControlName="accountType">
+                    <option value="AHORROS">AHORROS</option>
+                    <option value="CORRIENTE">CORRIENTE</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="bp-space-between">
+            <div>
+                <p>Número de cuenta:</p>
+                <input type="number" formControlName="accountNumber" placeholder="Numero de cuenta">
+            </div>
+            <div>
+                <p>Monto inicial:</p>
+                <input type="number" formControlName="initialAmount" placeholder="Monto inicial">
+            </div>
+        </div>
+        <br>
+        <div *ngIf="update">
+            <p>Estado:</p>
+            <div style="text-align: left !important;">
+                <input formControlName="status" type="checkbox">
+            </div>
+        </div>
+    </form>
+    <br>
 </div>

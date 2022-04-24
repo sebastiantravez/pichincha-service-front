@@ -51,6 +51,7 @@
                 <select formControlName="genderPerson">
                     <option value="FEMENINO">FEMENINO</option>
                     <option value="MASCULINO">MASCULINO</option>
+                    <option value="MASCULINO">OTRO</option>
                 </select>
             </div>
         </div>
@@ -73,7 +74,7 @@
         <div class="bp-space-between">
             <div>
                 <p>Número de documento:</p>
-                <input type="text" formControlName="dni" placeholder="Numero de documento">
+                <input type="text" maxlength="13" formControlName="dni" placeholder="Numero de documento">
             </div>
             <div>
                 <p>Dirección:</p>
