@@ -9,10 +9,29 @@ import { PersonPresenter } from '../models/person.model';
 export class PersonService {
   constructor(public http: HttpClient) {}
 
-  saveEmployee(personPresenter: PersonPresenter) {
+  savePerson(personPresenter: PersonPresenter) {
     return this.http.post(
       ambiente.urlServicioRest + 'savePerson',
       personPresenter
+    );
+  }
+
+  updatePerson(personPresenter: PersonPresenter) {
+    return this.http.put(
+      ambiente.urlServicioRest + 'updatePerson',
+      personPresenter
+    );
+  }
+
+  getAllPersons() {
+    return this.http.get<PersonPresenter[]>(
+      ambiente.urlServicioRest + 'getAllPersons'
+    );
+  }
+
+  deletePerson(personId: string) {
+    return this.http.delete(
+      ambiente.urlServicioRest + 'deletePerson?personId=' + personId
     );
   }
 }

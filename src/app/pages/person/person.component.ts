@@ -12,6 +12,8 @@ import { PersonService } from 'src/app/services/person.service';
 export class PersonComponent implements OnInit {
   personForm: FormGroup;
   isNewPerson: boolean = false;
+  update: boolean = false;
+  persons: PersonPresenter[] = [];
 
   constructor(
     public formBuilder: FormBuilder,
@@ -30,35 +32,14 @@ export class PersonComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
-  get fullName() {
-    return this.personForm.get('fullName');
-  }
-  get dni() {
-    return this.personForm.get('dni');
-  }
-  get age() {
-    return this.personForm.get('age');
-  }
-  get identificationPattern() {
-    return this.personForm.get('identificationPattern');
-  }
-  get address() {
-    return this.personForm.get('address');
-  }
-  get phone() {
-    return this.personForm.get('phone');
-  }
-  get password() {
-    return this.personForm.get('password');
-  }
-  get status() {
-    return this.personForm.get('status');
+  ngOnInit(): void {
+    this.getAllPersons();
   }
 
   registerPerson() {
     this.isNewPerson = true;
+    this.update = false;
+    this.personForm.reset();
   }
 
   canceled() {
@@ -83,8 +64,9 @@ export class PersonComponent implements OnInit {
         this.personForm.value.phone,
         client
       );
-      this.personService.saveEmployee(person).subscribe(
+      this.personService.savePerson(person).subscribe(
         (data) => {
+          this.getAllPersons();
           this.personForm.reset();
           this.isNewPerson = false;
           alert('Cliente registrado con exito');
@@ -96,5 +78,69 @@ export class PersonComponent implements OnInit {
     } else {
       alert('Todos los campos son requeridos');
     }
+  }
+
+  getAllPersons() {
+    this.personService.getAllPersons().subscribe((data: PersonPresenter[]) => {
+      this.persons = data;
+    });
+  }
+
+  editPerson(person: PersonPresenter) {
+    this.personForm.get('fullName')?.setValue(person.fullName);
+    this.personForm.get('genderPerson')?.setValue(person.genderPerson);
+    this.personForm.get('age')?.setValue(person.age);
+    this.personForm.get('dni')?.setValue(person.dni);
+    this.personForm
+      .get('identificationPattern')
+      ?.setValue(person.identificationPattern);
+    this.personForm.get('address')?.setValue(person.address);
+    this.personForm.get('phone')?.setValue(person.phone);
+    this.personForm.get('password')?.setValue(person.clientPresenter?.password);
+    this.personForm.get('status')?.setValue(person.clientPresenter?.status);
+    this.isNewPerson = true;
+    this.update = true;
+  }
+
+  updatePerson() {
+    if (this.personForm.valid) {
+      const client = new ClientPresenter(
+        '',
+        this.personForm.value.password,
+        this.personForm.value.status
+      );
+      const person = new PersonPresenter(
+        '',
+        this.personForm.value.fullName,
+        this.personForm.value.genderPerson,
+        this.personForm.value.age,
+        this.personForm.value.dni,
+        this.personForm.value.identificationPattern,
+        this.personForm.value.address,
+        this.personForm.value.phone,
+        client
+      );
+      this.personService.updatePerson(person).subscribe(
+        (data) => {
+          alert('Registro de cliente actualizado con exito');
+          this.getAllPersons();
+          this.personForm.reset();
+          this.isNewPerson = false;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.error.message);
+        }
+      );
+    } else {
+      alert('Todos los campos son requeridos');
+    }
+  }
+
+  deletePerson(person: PersonPresenter) {
+    const personId: any = person.personId;
+    this.personService.deletePerson(personId).subscribe((data) => {
+      this.getAllPersons();
+      alert('Cliente eliminado');
+    });
   }
 }

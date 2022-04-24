@@ -1,4 +1,9 @@
 <h1>Clientes</h1>
+<div *ngIf="isNewPerson" style="text-align: right;">
+    <button class="save" *ngIf="!update" (click)="savePerson()" type="button">Guardar</button>
+    <button class="save" *ngIf="update" (click)="updatePerson()" type="button">Actualizar</button>
+    <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
+</div>
 <div *ngIf="!isNewPerson" class="bp-space-between">
     <input class="bp-input" type="text" placeholder="Buscar">
     <button class="bp-button" (click)="registerPerson()">Nuevo</button>
@@ -14,17 +19,23 @@
             <th>Identificación</th>
             <th>Dirección</th>
             <th>Teléfono</th>
-            <th>Contraseña</th>
+            <th>Estado</th>
+            <th>Acciones</th>
         </tr>
-        <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-            <td>Germany</td>
-            <td>Germany</td>
-            <td>Germany</td>
-            <td>Germany</td>
-            <td>Germany</td>
+        <tr *ngFor="let person of persons">
+            <td>{{person.fullName}}</td>
+            <td>{{person.genderPerson}}</td>
+            <td>{{person.age}}</td>
+            <td>{{person.dni}}</td>
+            <td>{{person.identificationPattern}}</td>
+            <td>{{person.address}}</td>
+            <td>{{person.phone}}</td>
+            <td *ngIf="person.clientPresenter?.status">ACTIVO</td>
+            <td *ngIf="!person.clientPresenter?.status">INACTIVO</td>
+            <td>
+                <button (click)="editPerson(person)" class="edit">Editar</button>
+                <button (click)="deletePerson(person)" class="delete">Eliminar</button>
+            </td>
         </tr>
     </table>
 </div>
@@ -80,10 +91,12 @@
                 <input type="text" formControlName="password" placeholder="Contraseña">
             </div>
         </div>
+        <div *ngIf="update">
+            <p>Estado:</p>
+            <div style="text-align: left !important;">
+                <input formControlName="status" type="checkbox">
+            </div>
+        </div>
     </form>
     <br>
-    <div>
-        <button class="save" (click)="savePerson()" type="button">Guardar</button>
-        <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
-    </div>
 </div>

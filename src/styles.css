@@ -88,9 +88,29 @@ span {
     cursor: pointer;
 }
 
-select{
+select {
     border-radius: 3px;
     height: 30px;
     width: 507px;
     border: 1px solid gray;
+}
+
+
+.edit {
+    background-color: rgb(245, 219, 72);
+    color: navy;
+    border-radius: 3px;
+    border: 1px solid rgb(245, 219, 72);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.delete {
+    background-color: rgb(245, 219, 72);
+    color: navy;
+    border-radius: 3px;
+    border: 1px solid rgb(245, 219, 72);
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 5px;
 }
