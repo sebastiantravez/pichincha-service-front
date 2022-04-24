@@ -5,7 +5,7 @@
     <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
 </div>
 <div *ngIf="!isNewPerson" class="bp-space-between">
-    <input class="bp-input" type="text" placeholder="Buscar">
+    <input class="bp-input" #searchInput (keydown)="searchPerson(searchInput.value)" type="text" placeholder="Buscar">
     <button class="bp-button" (click)="registerPerson()">Nuevo</button>
 </div>
 <div *ngIf="!isNewPerson">

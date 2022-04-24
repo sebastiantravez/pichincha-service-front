@@ -50,18 +50,18 @@ export class PersonComponent implements OnInit {
     if (this.personForm.valid) {
       const client = new ClientPresenter(
         '',
-        this.personForm.value.password,
-        this.personForm.value.status
+        this.personForm.value.password.toString(),
+        this.personForm.value.status.toString()
       );
       const person = new PersonPresenter(
         '',
-        this.personForm.value.fullName,
-        this.personForm.value.genderPerson,
+        this.personForm.value.fullName.toString(),
+        this.personForm.value.genderPerson.toString(),
         this.personForm.value.age,
-        this.personForm.value.dni,
-        this.personForm.value.identificationPattern,
-        this.personForm.value.address,
-        this.personForm.value.phone,
+        this.personForm.value.dni.toString(),
+        this.personForm.value.identificationPattern.toString(),
+        this.personForm.value.address.toString(),
+        this.personForm.value.phone.toString(),
         client
       );
       this.personService.savePerson(person).subscribe(
@@ -106,18 +106,18 @@ export class PersonComponent implements OnInit {
     if (this.personForm.valid) {
       const client = new ClientPresenter(
         '',
-        this.personForm.value.password,
-        this.personForm.value.status
+        this.personForm.value.password.toString(),
+        this.personForm.value.status.toString()
       );
       const person = new PersonPresenter(
         '',
-        this.personForm.value.fullName,
-        this.personForm.value.genderPerson,
+        this.personForm.value.fullName.toString(),
+        this.personForm.value.genderPerson.toString(),
         this.personForm.value.age,
-        this.personForm.value.dni,
-        this.personForm.value.identificationPattern,
-        this.personForm.value.address,
-        this.personForm.value.phone,
+        this.personForm.value.dni.toString(),
+        this.personForm.value.identificationPattern.toString(),
+        this.personForm.value.address.toString(),
+        this.personForm.value.phone.toString(),
         client
       );
       this.personService.updatePerson(person).subscribe(
@@ -142,5 +142,18 @@ export class PersonComponent implements OnInit {
       this.getAllPersons();
       alert('Cliente eliminado');
     });
+  }
+
+  searchPerson(event: string) {
+    if (event.length > 3) {
+      this.personService
+        .searchPerson(event)
+        .subscribe((data: PersonPresenter[]) => {
+          this.persons = data;
+        });
+    }
+    if (event.length <= 0) {
+      this.getAllPersons();
+    }
   }
 }

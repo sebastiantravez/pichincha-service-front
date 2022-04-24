@@ -34,4 +34,10 @@ export class PersonService {
       ambiente.urlServicioRest + 'deletePerson?personId=' + personId
     );
   }
+
+  searchPerson(value: string) {
+    return this.http.get<PersonPresenter[]>(
+      ambiente.urlServicioRest + 'searchPerson/' + value
+    );
+  }
 }
