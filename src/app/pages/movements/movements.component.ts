@@ -127,8 +127,6 @@ export class MovementsComponent implements OnInit {
     this.movementForm.reset();
   }
 
-  editMovement(movement: MovementPresenter) {}
-
   deleteMovement(movement: MovementPresenter) {
     const movementId: any = movement.movementId;
     this.movementService.deleteMovement(movementId).subscribe((data) => {
@@ -136,8 +134,6 @@ export class MovementsComponent implements OnInit {
       alert('Transaccion eliminada');
     });
   }
-
-  updateMovement() {}
 
   getAllAccountsByClient(person: any) {
     this.accountService

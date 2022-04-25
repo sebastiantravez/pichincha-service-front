@@ -1,7 +1,7 @@
 <h1>Movimientos</h1>
 <div *ngIf="isNewMovement" style="text-align: right;">
     <button class="save" *ngIf="!update" (click)="saveMovement()" type="button">Guardar</button>
-    <button class="save" *ngIf="update" (click)="updateMovement()" type="button">Actualizar</button>
+    <!--<button class="save" *ngIf="update" (click)="updateMovement()" type="button">Actualizar</button>-->
     <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
 </div>
 <div *ngIf="!isNewMovement" class="bp-space-between">
@@ -26,7 +26,7 @@
         <tr *ngFor="let movement of movements">
             <td>{{movement.accountPresenter?.personPresenter?.fullName}}</td>
             <td>{{movement.accountPresenter?.accountType}}</td>
-            <td>{{movement.accountPresenter?.accountNumber}}</td>
+            <td class="negrita">{{movement.accountPresenter?.accountNumber}}</td>
             <td *ngIf="movement.movementType === 'DEBITO'" class="negrita">{{movement.movementType}}</td>
             <td *ngIf="movement.movementType === 'CREDITO'" class="negrita-navy">{{movement.movementType}}</td>
             <td>${{movement.movementAmount}}</td>
