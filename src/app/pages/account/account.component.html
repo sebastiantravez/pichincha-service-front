@@ -23,7 +23,7 @@
             <td>{{account.personPresenter?.fullName}}</td>
             <td>{{account.accountNumber}}</td>
             <td>{{account.accountType}}</td>
-            <td>${{account.initialAmount}}</td>
+            <td>${{account.initialAmount | number: '1.2-2'}}</td>
             <td *ngIf="account?.status">ACTIVO</td>
             <td *ngIf="!account?.status">INACTIVO</td>
             <td>

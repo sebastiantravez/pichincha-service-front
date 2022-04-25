@@ -29,8 +29,8 @@
             <td class="negrita">{{movement.accountPresenter?.accountNumber}}</td>
             <td *ngIf="movement.movementType === 'DEBITO'" class="negrita">{{movement.movementType}}</td>
             <td *ngIf="movement.movementType === 'CREDITO'" class="negrita-navy">{{movement.movementType}}</td>
-            <td>${{movement.movementAmount}}</td>
-            <td>${{movement.balanceAvailable}}</td>
+            <td>${{movement.movementAmount | number: '1.2-2'}}</td>
+            <td>${{movement.balanceAvailable | number: '1.2-2'}}</td>
             <td *ngIf="movement.transactionType === 'APROBADA'" class="negrita">{{movement.transactionType}}</td>
             <td *ngIf="movement.transactionType === 'CANCELADA'" class="color-red">{{movement.transactionType}}</td>
             <td>{{movement.movementDate | date}}</td>
