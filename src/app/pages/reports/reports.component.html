@@ -1,31 +1,33 @@
 <h1>Reportes</h1>
-<div>
-    <p>Cliente:</p>
-    <select formControlName="clientId">
-        <option value="{{person.clientPresenter?.clientId}}" *ngFor="let person of persons">
-            {{person.fullName}}
-        </option>
-    </select>
-</div>
-<div>
-    <p>Tipo de cuenta:</p>
-    <select formControlName="accountType">
-        <option value="AHORROS">AHORROS</option>
-        <option value="CORRIENTE">CORRIENTE</option>
-    </select>
-</div>
-<div class="bp-space-between">
+<form [formGroup]="reportForm">
     <div>
-        <p>Fecha Inicio:</p>
-        <input class="bp-input" type="date">
+        <p>Cliente:</p>
+        <select formControlName="clientId">
+            <option value="{{person.clientPresenter?.clientId}}" *ngFor="let person of persons">
+                {{person.fullName}}
+            </option>
+        </select>
     </div>
     <div>
-        <p>Fecha Fin:</p>
-        <input class="bp-input" type="date">
+        <p>Tipo de cuenta:</p>
+        <select formControlName="accountType">
+            <option value="AHORROS">AHORROS</option>
+            <option value="CORRIENTE">CORRIENTE</option>
+        </select>
     </div>
-</div>
-<br>
-<br>
+    <div class="bp-space-between">
+        <div>
+            <p>Fecha Inicio:</p>
+            <input formControlName="initDate" type="date">
+        </div>
+        <div>
+            <p>Fecha Fin:</p>
+            <input formControlName="endDate" type="date">
+        </div>
+    </div>
+    <br>
+    <br>
+</form>
 <div style="text-align: center;">
-    <button class="save" type="button">Generar PDF</button>
+    <button (click)="generateReport()" class="save" type="button">Generar PDF</button>
 </div>

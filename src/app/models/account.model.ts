@@ -7,6 +7,7 @@ export class AccountPresenter {
     public accountType?: string,
     public initialAmount?: number,
     public status?: boolean,
-    public personPresenter?: PersonPresenter
+    public personPresenter?: PersonPresenter,
+    public pdf?: any
   ) {}
 }
