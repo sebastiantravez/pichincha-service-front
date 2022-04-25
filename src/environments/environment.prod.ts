@@ -3,5 +3,5 @@ export const environment = {
 };
 
 export const ambiente = {
-  urlServicioRest: 'http://localhost:8080/',
+  urlServicioRest: 'http://localhost:8080/api/',
 };
