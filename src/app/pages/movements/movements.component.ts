@@ -110,14 +110,14 @@ export class MovementsComponent implements OnInit {
 
   searchMovement(event: string) {
     if (event.length > 3) {
-      this.accountService
-        .searchAccount(event)
-        .subscribe((data: AccountPresenter[]) => {
-          this.accounts = data;
+      this.movementService
+        .searchMovement(event)
+        .subscribe((data: MovementPresenter[]) => {
+          this.movements = data;
         });
     }
     if (event.length <= 0) {
-      this.getAllAccounts();
+      this.getAllMovements();
     }
   }
 
