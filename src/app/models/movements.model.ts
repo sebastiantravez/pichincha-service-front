@@ -8,6 +8,7 @@ export class MovementPresenter {
     public observation?: string,
     public movementAmount?: number,
     public balanceAvailable?: number,
-    public accountPresenter?: AccountPresenter
+    public accountPresenter?: AccountPresenter,
+    public transactionType?: string
   ) {}
 }

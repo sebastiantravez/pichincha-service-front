@@ -1,5 +1,94 @@
 <h1>Movimientos</h1>
-<div class="bp-search">
-    <input class="bp-input" type="text" placeholder="Buscar">
-    <button class="bp-button">Nuevo</button>
+<div *ngIf="isNewMovement" style="text-align: right;">
+    <button class="save" *ngIf="!update" (click)="saveMovement()" type="button">Guardar</button>
+    <button class="save" *ngIf="update" (click)="updateMovement()" type="button">Actualizar</button>
+    <button class="canceled" (click)="canceled()" type="button">Cancelar</button>
+</div>
+<div *ngIf="!isNewMovement" class="bp-space-between">
+    <input class="bp-input" #searchInput (keydown)="searchMovement(searchInput.value)" type="text" placeholder="Buscar">
+    <button class="bp-button" (click)="registerMovement()">Nuevo</button>
+</div>
+<div *ngIf="!isNewMovement">
+    <br>
+    <table id="persons">
+        <tr>
+            <th>Cliente</th>
+            <th>Tipo de cuenta</th>
+            <th>Número de cuenta</th>
+            <th>Tipo de movimiento</th>
+            <th>Movimiento</th>
+            <th>Saldo disponible</th>
+            <th>Estado de transacción</th>
+            <th>Fecha de movimiento</th>
+            <th>Observation</th>
+            <th>Acciones</th>
+        </tr>
+        <tr *ngFor="let movement of movements">
+            <td>{{movement.accountPresenter?.personPresenter?.fullName}}</td>
+            <td>{{movement.accountPresenter?.accountType}}</td>
+            <td>{{movement.accountPresenter?.accountNumber}}</td>
+            <td *ngIf="movement.movementType === 'DEBITO'" class="negrita">{{movement.movementType}}</td>
+            <td *ngIf="movement.movementType === 'CREDITO'" class="negrita-navy">{{movement.movementType}}</td>
+            <td>${{movement.movementAmount}}</td>
+            <td>${{movement.balanceAvailable}}</td>
+            <td *ngIf="movement.transactionType === 'APROBADA'" class="negrita">{{movement.transactionType}}</td>
+            <td *ngIf="movement.transactionType === 'CANCELADA'" class="color-red">{{movement.transactionType}}</td>
+            <td>{{movement.movementDate | date}}</td>
+            <td>{{movement.observation}}</td>
+            <td>
+                <div *ngIf="movement.transactionType === 'APROBADA'">
+                    <!--<button (click)="editMovement(movement)" class="edit">Editar</button>-->
+                    <button (click)="deleteMovement(movement)" class="delete">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="isNewMovement" class="bp-new-person">
+    <form [formGroup]="movementForm">
+        <div class="bp-space-between">
+            <div>
+                <p>Seleccione cliente:</p>
+                <select (change)="getAllAccountsByClient($event)" formControlName="clientId">
+                    <option value="{{person.clientPresenter?.clientId}}" *ngFor="let person of persons">
+                        {{person.fullName}}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <p>Seleccione cuenta para movimiento:</p>
+                <select formControlName="accountId">
+                    <option value="{{account.accountId}}" *ngFor="let account of accounts">
+                        Tipo cuenta: {{account.accountType}} - Cuenta #:{{account.accountNumber}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="bp-space-between">
+            <div>
+                <p>Tipo de movimiento:</p>
+                <select formControlName="movementType">
+                    <option value="DEBITO">RETIRO</option>
+                    <option value="CREDITO">DEPOSITO</option>
+                </select>
+            </div>
+            <div>
+                <p>Monto de movimiento:</p>
+                <input type="number" formControlName="movementAmount" placeholder="Monto de movimiento">
+            </div>
+        </div>
+        <div>
+            <p>Ingrese una observacion:</p>
+            <input type="text" formControlName="observation" placeholder="Observation">
+        </div>
+        <br>
+        <div *ngIf="update">
+            <p>Estado:</p>
+            <div style="text-align: left !important;">
+                <input formControlName="status" type="checkbox">
+            </div>
+        </div>
+    </form>
+    <br>
 </div>

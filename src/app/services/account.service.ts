@@ -40,4 +40,10 @@ export class AccountService {
       ambiente.urlServicioRest + 'searchAccount/' + value
     );
   }
+
+  getAllAccountsByClient(clientId: string) {
+    return this.http.get<AccountPresenter[]>(
+      ambiente.urlServicioRest + 'getAccountsByClient?clientId=' + clientId
+    );
+  }
 }

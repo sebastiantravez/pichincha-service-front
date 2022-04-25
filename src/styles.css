@@ -120,3 +120,17 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
+.color-red {
+    color: red;
+    font-weight: bold;
+}
+
+.negrita {
+    font-weight: bold;
+}
+
+.negrita-navy{
+    color: blue;
+    font-weight: bold;
+}
