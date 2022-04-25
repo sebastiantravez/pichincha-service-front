@@ -51,7 +51,7 @@ export class PersonComponent implements OnInit {
       const client = new ClientPresenter(
         '',
         this.personForm.value.password.toString(),
-        this.personForm.value.status.toString()
+        true
       );
       const person = new PersonPresenter(
         '',
